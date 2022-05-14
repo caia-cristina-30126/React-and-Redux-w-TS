@@ -1,0 +1,48 @@
+import React from 'react';
+import ReactDOM from 'react-dom'
+
+interface AppProps {
+  color?: string
+}
+
+/* interface AppState {
+  counter: number;
+} */
+
+/* const App = (props: AppProps): JSX.Element => { // functional component / a function actually
+   return <div>{props.color}</div>;
+} */
+
+class App extends React.Component<AppProps> {
+  // two ways of definind 'state':
+  //1 - redefining the prop that is already set up in the class Component
+   state = { counter: 0 };  // with es25
+
+   //2: defining the constructor
+/*   constructor(props: AppProps){
+       super(props);
+       this.state = { counter: 0 };
+   } */
+
+  // error functions bc as event handlers, these fctn are bound
+   onIncrement = (): void => {
+    this.setState({ counter: this.state.counter + 1});
+  };
+  onDecrement = (): void => {
+    this.setState({ counter: this.state.counter - 1});
+  }; 
+   render() {  
+    return (
+      <div>
+        <button onClick = {this.onIncrement}>increment</button>
+        <button onClick = {this.onDecrement}>decrement</button>
+        {this.state.counter} 
+      </div>
+    )
+  }  
+}
+
+ReactDOM.render(
+  <App />,
+  document.querySelector('#root')
+);
